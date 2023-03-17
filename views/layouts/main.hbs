@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Caculator</h1>
+    <form method="get" action="/caculator">
+        <span>Mời nhập số thứ nhất: </span>
+        <input value={{firstNumber}} name="firstNumber" id="firstNumber" type="number" step=".1">
+        <p id="errFirstNumber"></p>
+        <span>Mời nhập số thứ hai: </span>
+        <input value={{seccondNumber}} name="seccondNumber" id="seccondNumber" type="number" step=".1">
+        <p id="errSeccondNumber"></p>
+        <select name="operator" id="opt">
+            <option value="+">Cộng</option>
+            <option value="-">Trừ</option>
+            <option value="*">Nhân</option>
+            <option value="/">Chia</option>
+        </select>
+        <button type="submit" id="caculator">Caculator</button>
+    </form>
+
+    <h3 id="result">Result</h3>
+    {{{body}}}
+
+    <script>
+        let caculator = document.querySelector('#caculator');
+        let a = document.querySelector('#firstNumber');
+        let errA = document.querySelector('#errFirstNumber');
+        let b = document.querySelector('#seccondNumber');
+        let errB = document.querySelector('#errSeccondNumber');
+        let opt = document.querySelector('#opt');
+        let result = document.querySelector('#result');
+
+        caculator.onclick = ev => {
+            if (a.value.length == 0) {
+                errA.innerHTML = 'Vui lòng nhập số A';
+                errB.innerHTML = '';
+                ev.preventDefault();
+                return;
+            }
+            if (b.value.length == 0) {
+                errA.innerHTML = '';
+                errB.innerHTML = 'Vui lòng nhập số B';
+                ev.preventDefault();
+                return;
+            }
+            if (opt.value == '/' && b.value == 0) {
+                errA.innerHTML = '';
+                errB.innerHTML = 'Vui lòng nhập số B khác 0';
+                ev.preventDefault();
+                return;
+            }
+
+            errA.innerHTML = '';
+            errB.innerHTML = '';
+            // result.innerHTML = `Kết quả của ${a.value} ${opt.value} ${b.value} = `;
+        }
+    </script>
+</body>
+
+</html>
